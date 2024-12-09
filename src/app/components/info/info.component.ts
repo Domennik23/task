@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from "../../services/data.service";
-import { DataItem } from "../../interfaces/DataItem";
-import { NgForOf, NgIf } from "@angular/common";
-import { LoaderService } from "../../services/loader.service";
-import { FormsModule } from "@angular/forms";
+import { DataService } from '../../services/data.service';
+import { DataItem } from '../../interfaces/DataItem';
+import { NgForOf, NgIf } from '@angular/common';
+import { LoaderService } from '../../services/loader.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-info',
   standalone: true,
-  imports: [
-    NgIf,
-    NgForOf,
-    FormsModule
-  ],
+  imports: [NgIf, NgForOf, FormsModule],
   templateUrl: './info.component.html',
-  styleUrls: ['./info.component.scss']
+  styleUrls: ['./info.component.scss'],
 })
 export class InfoComponent implements OnInit {
   dataItems: DataItem[] = [];
@@ -55,12 +51,12 @@ export class InfoComponent implements OnInit {
         ...item,
         name: {
           first: item.name?.first ?? 'Unknown',
-          last: item.name?.last ?? 'Unknown'
+          last: item.name?.last ?? 'Unknown',
         },
         tags: item.tags ?? [],
         balance: item.balance ?? '$0.00',
         company: item.company ?? 'Unknown',
-        email: item.email ?? 'Unknown'
+        email: item.email ?? 'Unknown',
       }));
       this.totalItems = this.dataItems.length;
       this.loaderService.hide();
@@ -129,7 +125,10 @@ export class InfoComponent implements OnInit {
   performSearch(): void {
     this.filteredItems = this.dataItems.filter((item) => {
       const fieldValue = this.getFieldValue(item, this.searchField);
-      return fieldValue?.toString().toLowerCase().includes(this.searchValue.toLowerCase());
+      return fieldValue
+        ?.toString()
+        .toLowerCase()
+        .includes(this.searchValue.toLowerCase());
     });
   }
 
