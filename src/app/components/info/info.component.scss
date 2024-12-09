@@ -1,0 +1,231 @@
+$primary-bg: #2d363d;
+$accent-color: #ae5bc5;
+$accent-hover: #5c9c92;
+$text-color: #f8fafc;
+$row-hover: #4d4887;
+$border-color: #a5481d;
+$secondary-bg: #4d4887;
+
+.filters {
+  padding: 20px;
+  background-color: $secondary-bg;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__configuration {
+    padding: 15px;
+    background-color: $primary-bg;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+  }
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 10px;
+
+    label {
+      color: $accent-color;
+    }
+  }
+
+  &__dropdown {
+    padding: 8px;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    background-color: $primary-bg;
+    color: $text-color;
+
+    &:hover {
+      background-color: $row-hover;
+    }
+  }
+
+  &__input {
+    padding: 8px;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    background-color: $primary-bg;
+    color: $text-color;
+    max-width: 250px;
+    &::placeholder {
+      color: #94a3b8;
+    }
+  }
+
+  &__columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: $accent-color;
+    }
+  }
+}
+
+.table-container {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  background-color: $primary-bg;
+  overflow-x: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    background-color: $accent-color;
+    color: $text-color;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 16px 12px;
+    text-align: left;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: $accent-hover;
+      cursor: pointer;
+    }
+  }
+
+  tr:nth-child(even) {
+    background-color: $row-hover;
+  }
+
+  tr:hover {
+    background-color: $accent-hover;
+  }
+
+  td {
+    padding: 12px 8px;
+    text-align: left;
+    font-size: 14px;
+    color: $text-color;
+    border: 1px solid $border-color;
+    word-wrap: break-word;
+  }
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: $accent-color;
+  color: $text-color;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $accent-hover;
+  }
+
+  &:disabled {
+    background-color: $border-color;
+    cursor: not-allowed;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: $accent-color;
+    color: $text-color;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $accent-hover;
+    }
+
+    &:disabled {
+      background-color: $border-color;
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: $border-color;
+      }
+    }
+  }
+
+  select {
+    padding: 8px;
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    background-color: $secondary-bg;
+    color: $text-color;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .filters__row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .table th, .table td {
+    white-space: nowrap;
+  }
+
+  .filters__inner {
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .filters {
+    padding: 10px;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+
+  .table-container {
+    margin: 10px 0;
+    padding: 10px;
+  }
+}

@@ -1,0 +1,70 @@
+<div class="filters">
+  <div class="filters__inner">
+    <div class="filters__configuration">
+      <div class="filters__row">
+        <label>
+          Items per page:
+          <select (change)="updatePagination($event)" class="filters__dropdown">
+            <option *ngFor="let count of [5, 10, 15, 20]" [value]="count">{{ count }}</option>
+          </select>
+        </label>
+
+        <label>
+          Search by:
+          <select [(ngModel)]="searchField" name="searchField" class="filters__dropdown">
+            <option value="name.first">First Name</option>
+            <option value="name.last">Last Name</option>
+            <option value="company">Company</option>
+            <option value="email">Email</option>
+            <option value="address">Address</option>
+            <option value="tags">Tags</option>
+            <option value="favoriteFruit">Favorite Fruit</option>
+          </select>
+        </label>
+
+        <input
+          type="text"
+          [(ngModel)]="searchValue"
+          name="searchValue"
+          placeholder="Enter search value"
+          class="filters__input"
+        />
+
+        <button (click)="performSearch()" [disabled]="!searchValue" class="btn btn-primary">Search</button>
+        <button (click)="resetFilter()" [disabled]="!searchValue" class="btn btn-primary">Reset</button>
+      </div>
+
+      <div class="filters__columns">
+        <label *ngFor="let column of columns">
+          <input type="checkbox" [(ngModel)]="column.visible" /> {{ column.label }}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="table-container">
+  <table class="table">
+    <thead>
+    <tr>
+      <th *ngFor="let column of columns" [hidden]="!column.visible" (click)="sort(column.key)">
+        {{ column.label }}
+        <span *ngIf="sortField === column.key">{{ sortOrder === 'asc' ? '↑' : '↓' }}</span>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of paginatedItems">
+      <td *ngFor="let column of columns" [hidden]="!column.visible">
+        {{ getFieldValue(item, column.key) }}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="pagination">
+  <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>
